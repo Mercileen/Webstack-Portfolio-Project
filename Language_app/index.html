@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cool Language</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <style>
+    /* Inline CSS for quick styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #0099ff, #66ccff); /* Gradient background */
+      text-align: center;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #0078ff;
+      padding: 10px 20px;
+      color: white;
+    }
+
+    .navbar .log {
+      font-size: 2rem;
+    }
+
+    .navbar .menu ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar .menu ul li {
+      margin-right: 20px;
+    }
+
+    .navbar .menu ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .navbar .menu ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .navbar .search {
+      display: flex;
+      align-items: center;
+    }
+
+    .search .srch {
+      padding: 8px;
+      margin-right: 10px;
+    }
+
+    .search .btn {
+      padding: 8px 12px;
+      border: none;
+      background-color: #005ec3;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .search .btn:hover {
+      background-color: #003a8c;
+    }
+
+    .auth-container, #flashcards, #progress-tracker {
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 500px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: white;
+    }
+
+    .auth-container input, .auth-container button, #language-select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+    }
+
+    .auth-container button {
+      background-color: #0078ff;
+      color: white;
+      border: none;
+    }
+
+    .auth-container button:hover {
+      background-color: #005ec3;
+    }
+
+    .flashcard {
+      perspective: 1000px;
+      margin: 20px auto;
+    }
+
+    .flashcard-inner {
+      width: 200px;
+      height: 300px;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flashcard-inner:hover {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-front, .flashcard-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .flashcard-back {
+      transform: rotateY(180deg);
+      background-color: #fffae5;
+    }
+
+    #progress-bar-container {
+      height: 20px;
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #0078ff;
+      border-radius: 4px;
+    }
+
+    footer {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #0078ff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <h2 class="log">CoolyApp</h2>
+      <div class="menu">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Service</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="search">
+        <input class="srch" type="text" placeholder="Type to search">
+        <button class="btn">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="auth-container">
+      <h2>Login to Cool Language Learning App</h2>
+      <input type="text" id="username" placeholder="Enter your username">
+      <input type="password" id="password" placeholder="Enter your password">
+      <button onclick="login()">Login</button>
+      <p class="link">Don't have an account? <a href="#">Sign up here</a></p>
+      <p class="liw">Log in with</p>
+      <div class="icon">
+        <a href="#" aria-label="Login with Facebook"><ion-icon name="logo-facebook"></ion-icon></a>
+        <a href="#" aria-label="Login with Twitter"><ion-icon name="logo-twitter"></ion-icon></a>
+        <a href="#" aria-label="Login with Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+        <a href="#" aria-label="Login with Google"><ion-icon name="logo-google"></ion-icon></a>
+        <a href="#" aria-label="Login with Skype"><ion-icon name="logo-skype"></ion-icon></a>
+      </div>
+    </div>
+
+    <section id="flashcards">
+      <h3>Flashcards</h3>
+      <div class="flashcard" onclick="toggleCard(this)">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <p>Question: Capital of France?</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Answer: Paris</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="progress-tracker">
+      <h2>Progress Tracker</h2>
+      <p id="progress-status">Completed: 0%</p>
+      <button id="mark-progress-btn">Mark Progress</button>
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+    </section>
+  </main>
+  <div class="share-container">
+    <button id="share-button">Share This App</button>
+    <div id="share-options" class="hidden">
+      <a href="#" id="share-facebook" target="_blank">Share on Facebook</a>
+      <a href="#" id="share-twitter" target="_blank">Share on Twitter</a>
+      <a href="#" id="share-whatsapp" target="_blank">Share on WhatsApp</a>
+      <a href="#" id="share-linkedin" target="_blank">Share on LinkedIn</a>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2025 Cool Language Learning App</p>
+  </footer>
+</body>
+</html>
